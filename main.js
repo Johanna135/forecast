@@ -96,7 +96,7 @@ async function loadWind(url) {
     L.velocityLayer({
         data: jsondata,
         lineWidth: 2,
-        displayOptions: {
+        displayOptions: { // Anzeigeoptionen von Wind
             directionString: "Windrichtung",
             speedString: "Windgeschwindigkeit",
             speedUnit: "k/h",
