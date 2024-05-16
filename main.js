@@ -62,6 +62,12 @@ async function showForecast(url) {
                 <img src="icons/${symbol}.svg" alt="${symbol}" style="width:30px" title="${time.toLocaleString()}"> 
                 ` // mit title = .... habe wir wenn wir mit der Maus drüber fahren die Uhrzeit und das Datum für das jeweilige Wetter icon
             }
+
+            //Link zum Datendownload
+            content += `
+            <p><a href="${url}" target = "met.no"> Daten downloaden</a></p>
+            `
+
             L.popup(latlng, {
                 content: content // das popup hat den content der variable content
             }).openOn(themaLayer.forecast);
