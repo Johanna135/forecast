@@ -106,9 +106,17 @@ async function loadWind(url) {
     }).addTo(themaLayer.wind);
 
     // Vorhersagezeitpunkt ermitteln
-    let forecastDate = new Date(jsondata[0].header.reTime);
+    let forecastDate = new Date(jsondata[0].header.refTime);
     forecastDate.setHours(forecastDate.getHours() + jsondata[0].header.forecastTime);
     console.log(forecastDate);
+
+    document.querySelector("#forecast-date").innerHTML = `
+        (<a href= "${url}" target ="met.no">Stand ${forecastDate.toLocaleString()}</a>)
+        `;
+    //# raute heißt id,der selector sucht nach element das forecast-date haeiß mittels der id
+    //document.querySelector("#map").innerHTML = "heute keine Karte";
+    //document.querySelector("body").innerHTML = "das wars für heute";
+    // mit querySelector und .innerHTML kann ich viel verändern, zum Beispiel map weg tun oder alles weg tun
 }
 loadWind("https://geographie.uibk.ac.at/data/ecmwf/data/wind-10u-10v-europe.json");
 
