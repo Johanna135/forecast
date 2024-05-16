@@ -39,6 +39,8 @@ async function showForecast(url) {
     console.log(jsondata);
     L.geoJSON(jsondata, {
         pointToLayer: function (feature, latlng) {
+            L.popup(latlng, { content: '<p>Hello world!<br />This is a nice popup.</p>' })
+                .openOn(themaLayer.forecast);
 
         }
     }).addTo(themaLayer.forecast);
