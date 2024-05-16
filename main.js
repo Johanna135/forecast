@@ -41,6 +41,8 @@ async function showForecast(url) {
         pointToLayer: function (feature, latlng) { // ich mach den Content um das wo zuerst hello world steht das dann drin steht
             let details = feature.properties.timeseries[0].data.instant.details; // wenn eckige Klammer im Original feature muss ich mit Index zugreifen ich mache eine Variable um auf die features zuzugreifen weil es so tief hinein geht und man das nicht immer schreiben will
             let time = new Date(feature.properties.timeseries[0].time); // das new Date mach ein echtes Datum aus einem Datumsstring --> mit echtem Datum kann ich rechnen, nur mir string nicht
+
+
             let content = ` 
             <h4>Wettervorhersage für ${time.toLocaleString()}</h4>
             <ul>
@@ -52,6 +54,13 @@ async function showForecast(url) {
                 <li>Windgeschwindigkeit (km/h): ${Math.round(details.wind_speed * 3.6)}</li>
             </ul>
             `;
+            // Wettericons für die nächsten 24 Stunden in 3-Stunden Schritten
+            for (let i = 0; i <= 24; i += 3) {
+                let symbol = feature.properties.timeseries[i].data.next_1_hours.summary.symbol_code; //ich geh die ganzen Datensätze durch. von der stelle 0 bis 24. --> für die nächsten 24h Dann schreib ich [i] nach timeseries
+                content += `
+                <img src="icons/${symbol}.svg" alt="${symbol}" style="width:30px">
+                `
+            }
             L.popup(latlng, {
                 content: content // das popup hat den content der variable content
             }).openOn(themaLayer.forecast);
