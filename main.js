@@ -57,9 +57,10 @@ async function showForecast(url) {
             // Wettericons für die nächsten 24 Stunden in 3-Stunden Schritten
             for (let i = 0; i <= 24; i += 3) {
                 let symbol = feature.properties.timeseries[i].data.next_1_hours.summary.symbol_code; //ich geh die ganzen Datensätze durch. von der stelle 0 bis 24. --> für die nächsten 24h Dann schreib ich [i] nach timeseries
+                let time = new Date(feature.properties.timeseries[i].time);
                 content += `
-                <img src="icons/${symbol}.svg" alt="${symbol}" style="width:30px">
-                `
+                <img src="icons/${symbol}.svg" alt="${symbol}" style="width:30px" title="${time.toLocaleString()}"> 
+                ` // mit title = .... habe wir wenn wir mit der Maus drüber fahren die Uhrzeit und das Datum für das jeweilige Wetter icon
             }
             L.popup(latlng, {
                 content: content // das popup hat den content der variable content
