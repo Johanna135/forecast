@@ -38,7 +38,18 @@ async function showForecast(url) {
     // aktuelles Wetter und Wettervorhersage implementieren
     console.log(jsondata);
     L.geoJSON(jsondata, {
-        pointToLayer: function (feature, latlng) {
+        pointToLayer: function (feature, latlng) { // ich mach den Content um das wo zuerst hello world steht das dann drin steht
+            let content = `
+            <ul>
+                <li>Luftdruck Meereshöhe(hPa): air_pressure_at_sea_level</li>
+                <li>Temperatur (°C): air_temperature</li>
+                <li>Bewölkungsgrad (%): cloud_area_fraction</li>
+                <li>Niederschlag (mm): precipitation_amount</li>
+                <li>Relative Luftfeuchte (%): relative_humidity</li>
+                <li>Windrichtung (°): wind_from_direction</li>
+                <li>Windgeschwindigkeit (km/h): wind_speed</li>
+            </ul>
+            `
             L.popup(latlng, { content: '<p>Hello world!<br />This is a nice popup.</p>' })
                 .openOn(themaLayer.forecast);
 
